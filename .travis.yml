@@ -4,7 +4,7 @@ rvm:
 addons:
     postgresql: 9.3
 before_script:
-  - psql -c 'create database pastinaca_test' -U postgres
+  - psql -c 'create database galeopterus_test' -U postgres
   - cp config/database.yml.travis config/database.yml
   - bundle exec rake db:create RAILS_ENV=test
   - bundle exec rake db:migrate RAILS_ENV=test

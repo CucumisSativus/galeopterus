@@ -1,0 +1,5 @@
+test:
+  adapter: postgresql
+  database: galeopterus_test
+  username: postgres
+
