@@ -8,6 +8,14 @@
   - @boards.each do |board|
     .board
       = link_to board.title, board_path(board)
+      .pull-right
+        lists:
+        = board.list_count
+        |
+        cards:
+        = board.card_count
+        = link_to board_path(board), method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' do
+          %i.glyphicon.glyphicon-trash
 
 #addBoardModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "#addBoardTitle", role: "dialog", tabindex: "-1"}
   .modal-dialog

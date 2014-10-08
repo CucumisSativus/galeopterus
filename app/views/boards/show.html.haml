@@ -1,7 +1,39 @@
-= link_to :back do
+= link_to user_dashboard_path do
   %i.glyphicon.glyphicon-circle-arrow-left
   Back to dashboard
 %h2= @board.title
+.btn.btn-primary.btn-xs{ data: { target: "#modalId", toggle: "modal" }}
+  Add list
+  .glyphicon.glyphicon-plus
 = link_to board_path(@board), method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' do
   Delete this board
   %i.glyphicon.glyphicon-trash
+
+%h4 Task lists:
+#lists_container
+  - @board.lists.each do |list|
+    .list
+      = list.title
+      .pull-right
+        cards:
+        = list.cards.count
+        = link_to list_path, class: 'btn btn-success btn-xs' do
+          .glyphicon.glyphicon-plus
+        = link_to list_path, method: :delete, class: 'btn btn-danger btn-xs' do
+          .glyphicon.glyphicon-trash
+      %hr
+
+#modalId.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "#modalTitleId", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4#modalTitleId.modal-title Title
+      .modal-body
+        = form_for List.new, url: { controller: 'lists', action: 'create'} do |f|
+          .form-group
+            = f.label :title, 'Title:'
+            = f.text_field :title, class: 'form-control'
+          .text-center
+            = f.hidden_field :board_id, value: @board.id
+            = f.submit 'Add list', class: 'btn btn-success'
