@@ -1,0 +1,24 @@
+%h3 User dashboard
+
+%h4.inline Your projects:
+.btn.btn-primary.btn-xs{ data: { target: "#addBoardModal", toggle: "modal" }}
+  Add project
+  %i.glyphicon.glyphicon-plus
+#boards_container
+- @boards.each do |board|
+  .board
+    = board.title
+
+#addBoardModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "#addBoardTitle", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4#addBoardTitle.modal-title Add new board
+      .modal-body
+        = form_for Board.new, url: { controller: 'boards', action: 'create'} do |f|
+          .form-group
+            = f.label :title, 'Title:'
+            = f.text_field :title, class: 'form-control'
+          .text-center
+            = f.submit 'Create board', class: 'btn btn-success'
