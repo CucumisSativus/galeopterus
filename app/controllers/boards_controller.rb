@@ -5,8 +5,12 @@ class BoardsController < ApplicationController
     if @board.save
       BoardConnection.create user_id: current_user.id, board_id: @board.id
       redirect_to user_dashboard_path, notice: 'Board added successfuly!'
-    else
     end
+  end
+
+  def show
+    return if @board = current_user.boards.where(id: params[:id]).first
+    redirect_to user_dashboard_path, alert: 'You are not allowed to see this board!'
   end
 
   private

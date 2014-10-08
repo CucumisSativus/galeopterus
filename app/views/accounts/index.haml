@@ -1,13 +1,13 @@
-%h3 User dashboard
-
+%h2 User dashboard
+%hr
 %h4.inline Your projects:
 .btn.btn-primary.btn-xs{ data: { target: "#addBoardModal", toggle: "modal" }}
   Add project
   %i.glyphicon.glyphicon-plus
 #boards_container
-- @boards.each do |board|
-  .board
-    = board.title
+  - @boards.each do |board|
+    .board
+      = link_to board.title, board_path(board)
 
 #addBoardModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "#addBoardTitle", role: "dialog", tabindex: "-1"}
   .modal-dialog

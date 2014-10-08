@@ -1,0 +1,7 @@
+= link_to :back do
+  %i.glyphicon.glyphicon-circle-arrow-left
+  Back to dashboard
+%h2= @board.title
+= link_to board_path(@board), method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' do
+  Delete this board
+  %i.glyphicon.glyphicon-trash
