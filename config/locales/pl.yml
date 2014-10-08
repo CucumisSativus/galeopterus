@@ -1,1 +1,13 @@
 pl:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: 'Email nie może być pusty'
+            password:
+              blank: 'Hasło nie może być pusty'
+              too_short: 'Podane hasło jest za krótkie'
+            password_confirmation:
+              confirmation: 'Podane hasła nie zgadzają się'
