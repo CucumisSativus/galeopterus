@@ -1,4 +1,5 @@
 class ListsController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     @list = List.new list_params
