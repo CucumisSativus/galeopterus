@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'accounts#index', as: :user_dashboard
 
   resources :boards
-  resources :lists
-  resources :cards
+  resources :lists, only: [:create, :destroy]
+  resources :cards, only: [:create, :destroy]
 end

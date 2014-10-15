@@ -10,6 +10,13 @@ class CardsController < ApplicationController
     end
   end
 
+  def destroy
+    @card = Card.find(params[:id])
+    @board = @card.list.board
+    @card.destroy
+    redirect_to board_path(@board), notice: 'Card removed'
+  end
+
   private
 
   def card_params

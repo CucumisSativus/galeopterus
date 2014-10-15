@@ -7,6 +7,13 @@ class ListsController < ApplicationController
     redirect_to board_path(params[:list][:board_id])
   end
 
+  def destroy
+    @list = List.find(params[:id])
+    @board = @list.board
+    @list.destroy
+    redirect_to board_path(@board), notice: 'List removed'
+  end
+
   private
 
   def list_params
