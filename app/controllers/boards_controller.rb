@@ -14,6 +14,12 @@ class BoardsController < ApplicationController
     redirect_to user_dashboard_path, alert: 'You are not allowed to see this board!'
   end
 
+  def destroy
+    @board = Board.find(params[:id])
+    @board.destroy
+    redirect_to user_dashboard_path, notice: 'Board removed'
+  end
+
   private
 
   def board_params
