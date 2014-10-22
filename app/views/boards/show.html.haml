@@ -2,33 +2,45 @@
   %i.glyphicon.glyphicon-circle-arrow-left
   Back to dashboard
 %h2= @board.title
-.project-members
-  %h3
-    %i.icon.ion-person-stalker
-    Members:
-  %ul
-    - @board.users.each do |user|
-      %li= user.email
-  %h4
-    = link_to '#' do
-      Invite
-      %i.icon.ion-person-add
-
-.btn.btn-primary.btn-xs{ data: { target: "#addList", toggle: "modal" }}
-  Add list
-  .glyphicon.glyphicon-plus
 = link_to board_path(@board), method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' do
   Delete this board
   %i.glyphicon.glyphicon-trash
+.box
+  .project-members
+    %h3
+      %i.icon.ion-person-stalker
+      Members:
+    %ul
+      - @board.users.each do |user|
+        %li
+          = user.email
+          %a.text-danger{ href: '#' }
+            %i.icon.ion-minus-circled
+    %h4
+      = link_to '#' do
+        Invite
+        %i.icon.ion-person-add
 
-%h4 Task lists:
-#lists_container
-  - @board.lists.each do |list|
-    = render 'list', list: list
-=render 'add_card_modal'
-=render 'add_file_modal'
+
+  %h3
+    %i.icon.ion-clipboard
+    Task lists:
+  .board-acionts
+    %h4
+      %a{ data: { target: "#addList", toggle: "modal", href: '#' }}
+        Add list
+        %i.icon.ion-plus-circled
+  %ul#lists_container.list-inline
+    - @board.lists.each do |list|
+      %li.ui-state-default= render 'list', list: list
+  =render 'add_card_modal'
+  =render 'add_file_modal'
 
 :coffee
-  $(".add-card").click (e) ->
-    list_id = $(e.target).attr 'data-listid'
-    $('#cardListId').attr 'value', list_id
+  $ ->
+    $(".add-card").click (e) ->
+      list_id = $(e.target).attr 'data-listid'
+      $('#cardListId').attr 'value', list_id
+
+    $("#lists_container").sortable(placeholder: "ui-state-highlight")
+    $("#lists_container").disableSelection()
