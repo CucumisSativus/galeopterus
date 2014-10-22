@@ -5,12 +5,15 @@
     %title= content_for?(:title) ? yield(:title) : 'Galeopterus'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Galeopterus'}"}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css',
+                          media: 'all',
+                          'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
     %header
       = render 'layouts/navigation'
     %main{:role => "main"}
-      .container
+      .container-fluid
         = render 'layouts/messages'
         = yield

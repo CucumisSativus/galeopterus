@@ -1,9 +1,31 @@
+#lists_container{
+  display: flex;
+  overflow: auto;
+}
+
 .list{
   border: 1px solid #bbb;
-  border-radius: 2px;
+  border-radius: 4px;
   display: inline-block;
   margin-bottom: 20px;
   margin-right: 30px;
-  min-width: 400px;
-  padding: 20px 30px;
+  min-width: 300px;
+  min-height: 500px;
+}
+
+.list-header{
+  background-color: #ccc;
+  border-bottom: 1px #aaa solid;
+  padding: 5px;
+  position: relative;
+  h3{
+    margin: 0;
+  }
+}
+
+.list-actions{
+  display: inline-block;
+  position: absolute;
+  right: 5px;
+  top: 10px;
 }

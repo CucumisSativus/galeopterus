@@ -2,6 +2,18 @@
   %i.glyphicon.glyphicon-circle-arrow-left
   Back to dashboard
 %h2= @board.title
+.project-members
+  %h3
+    %i.icon.ion-person-stalker
+    Members:
+  %ul
+    - @board.users.each do |user|
+      %li= user.email
+  %h4
+    = link_to '#' do
+      Invite
+      %i.icon.ion-person-add
+
 .btn.btn-primary.btn-xs{ data: { target: "#addList", toggle: "modal" }}
   Add list
   .glyphicon.glyphicon-plus
@@ -12,57 +24,11 @@
 %h4 Task lists:
 #lists_container
   - @board.lists.each do |list|
-    .list
-      = list.title
-      = link_to list_path, method: :delete, class: 'btn btn-danger btn-xs' do
-        .glyphicon.glyphicon-trash
-      .pull-right
-        cards:
-        = list.cards.count
-        .glyphicon.glyphicon-plus.add-card{class: 'btn btn-success btn-xs', data: { target: "#addCard", toggle: "modal", listId: list.id}}
+    = render 'list', list: list
+=render 'add_card_modal'
+=render 'add_file_modal'
 
-      %hr
-      %ul.list-group
-        -list.cards.each do |card|
-          %li.list-group-item
-            =card.title
-            .pull-right
-              = link_to card_path(card), method: :delete, class: 'btn btn-danger btn-xs' do
-                .glyphicon.glyphicon-trash
-#addCard.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "#modalTitleId", role: "dialog", tabindex: "-1"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
-        %h4#modalTitleId.modal-title Add new card
-      .modal-body
-        = form_for Card.new, url: cards_path do |f|
-          .form-group
-            = f.label :title, 'Title:'
-            = f.text_field :title, class: 'form-control'
-          .text-center
-            = f.hidden_field :list_id, value: 0, id: 'cardListId'
-            = f.hidden_field :board_id, value: @board.id
-            = f.submit 'Add card', class: 'btn btn-success'
-#addList.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "#modalTitleId", role: "dialog", tabindex: "-1"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
-        %h4#modalTitleId.modal-title Add new list
-      .modal-body
-        = form_for List.new, url: { controller: 'lists', action: 'create'} do |f|
-          .form-group
-            = f.label :title, 'Title:'
-            = f.text_field :title, class: 'form-control'
-          .text-center
-            = f.hidden_field :board_id, value: @board.id
-            = f.submit 'Add list', class: 'btn btn-success'
 :coffee
-  -# $("#addCard").on "show.bs.modal", (e) ->
-  -#   console.log e.target
   $(".add-card").click (e) ->
     list_id = $(e.target).attr 'data-listid'
     $('#cardListId').attr 'value', list_id
-  
-  
