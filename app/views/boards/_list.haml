@@ -7,9 +7,9 @@
     %h3= list.title
     cards:
     = list.cards.count
-  %ul#tasks_container
+  %ul.tasks-container
     -list.cards.each do |card|
-      %li.task-item
+      %li.task-item.ui-state-default
         =card.title
         .pull-right
           = link_to card_path(card), method: :delete, class: 'btn btn-danger btn-xs' do
@@ -17,5 +17,6 @@
 
 :coffee
   $ ->
-    $("#tasks_container").sortable(placeholder: "ui-state-highlight")
-    $("#tasks_container").disableSelection()
+    $(".tasks-container").sortable
+      placeholder: "ui-state-highlight"
+      connectWith: ".tasks-container"

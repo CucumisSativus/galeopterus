@@ -16,4 +16,19 @@ class Board < ActiveRecord::Base
     end
     card_number
   end
+
+  def list_by_order
+    ordered = []
+    self.list_order.each { |id| ordered << self.lists.find(id) }
+    ordered
+  end
+
+  def reorder_lists
+    listsId = []
+    self.lists.each do |list|
+      listsId << list.id
+    end
+    self.list_order = listsId
+    self.save!
+  end
 end
