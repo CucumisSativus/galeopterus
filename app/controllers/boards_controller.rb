@@ -20,9 +20,18 @@ class BoardsController < ApplicationController
     redirect_to user_dashboard_path, notice: 'Board removed'
   end
 
+  def update
+    @board = Board.find params[:id]
+    @board.update! board_params
+    respond_to do |format|
+      format.html {}
+      format.json { render json: @board }
+    end
+  end
+
   private
 
   def board_params
-    params.require(:board).permit(:title)
+    params.require(:board).permit(:title, :list_order => [])
   end
 end
