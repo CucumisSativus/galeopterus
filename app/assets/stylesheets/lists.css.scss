@@ -5,6 +5,13 @@
   li{
     vertical-align: top;
   }
+  > .ui-state-highlight {
+    background-color: #c5e8fc;
+    border: 1px #3e9bc0 dotted;
+    height: 500px;
+    vertical-align: top;
+    width: 100px;
+  }
 }
 
 .list{
@@ -30,12 +37,4 @@
   position: absolute;
   right: 5px;
   top: 10px;
-}
-
-.ui-state-highlight {
-  background-color: #c5e8fc;
-  border: 1px #3e9bc0 dotted;
-  height: 500px;
-  vertical-align: top;
-  width: 100px;
 }

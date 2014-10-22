@@ -1,32 +1,21 @@
 %h2 User dashboard
 %hr
-%h4.inline Your projects:
-.btn.btn-primary.btn-xs{ data: { target: "#addBoardModal", toggle: "modal" }}
-  Add project
-  %i.glyphicon.glyphicon-plus
-#boards_container
-  - @boards.each do |board|
-    .board
-      = link_to board.title, board_path(board)
-      .pull-right
-        lists:
-        = board.list_count
-        |
-        cards:
-        = board.card_count
-        = link_to board_path(board), method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' do
-          %i.glyphicon.glyphicon-trash
+.box
+  %h4.inline Your projects:
+  %a{ href: '#', data: { target: "#addBoardModal", toggle: "modal" }}
+    Add project
+    %i.icon.ion-plus-circled
+  #boards_container
+    - @boards.each do |board|
+      .board
+        = link_to board.title, board_path(board)
+        .pull-right
+          lists:
+          = board.list_count
+          |
+          cards:
+          = board.card_count
+          = link_to board_path(board), method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' do
+            %i.glyphicon.glyphicon-trash
 
-#addBoardModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "#addBoardTitle", role: "dialog", tabindex: "-1"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
-        %h4#addBoardTitle.modal-title Add new board
-      .modal-body
-        = form_for Board.new, url: { controller: 'boards', action: 'create'} do |f|
-          .form-group
-            = f.label :title, 'Title:'
-            = f.text_field :title, class: 'form-control'
-          .text-center
-            = f.submit 'Create board', class: 'btn btn-success'
+=render 'add_board_modal'

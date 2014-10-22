@@ -1,0 +1,15 @@
+#tasks_container{
+  list-style: none;
+  padding: 0;
+  > .ui-state-highlight {
+    background-color: #c5e8fc;
+    border: 1px #3e9bc0 dotted;
+    padding: 15px 5px;
+  }
+
+}
+
+.task-item{
+  border: 1px solid #aaa;
+  padding: 15px 5px;
+}
