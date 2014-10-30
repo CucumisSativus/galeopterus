@@ -5,7 +5,7 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
         %h4#addBoardTitle.modal-title Add new board
       .modal-body
-        = form_for Board.new, url: { controller: 'boards', action: 'create'} do |f|
+        = form_for Board.new, url: { controller: 'boards', action: 'create'}, remote: true do |f|
           .form-group
             = f.label :title, 'Title:'
             = f.text_field :title, class: 'form-control'
