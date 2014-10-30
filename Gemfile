@@ -10,7 +10,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
-gem 'bootstrap-sass'
 gem 'devise'
 gem 'devise-i18n'
 gem 'haml-rails'
@@ -18,6 +17,7 @@ gem 'pg'
 # assets
 gem 'rails-assets-jquery-ui'
 gem 'rails-assets-jquery-sortable'
+gem 'rails-assets-bootstrap-sass'
 
 group :development do
   gem 'better_errors'

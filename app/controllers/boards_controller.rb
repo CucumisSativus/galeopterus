@@ -10,7 +10,7 @@ class BoardsController < ApplicationController
       format.html do
         redirect_to user_dashboard_path, notice: 'Board added successfuly!'
       end
-      format.js { }
+      format.js {}
     end
   end
 
@@ -26,7 +26,6 @@ class BoardsController < ApplicationController
       format.html { redirect_to user_dashboard_path, notice: 'Board removed' }
       format.js {}
     end
-
   end
 
   def update
