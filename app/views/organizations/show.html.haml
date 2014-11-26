@@ -1,0 +1,21 @@
+%h2
+  =@organization.name
+=link_to 'Edit', edit_organization_path(@organization)
+=link_to 'Destroy', organization_path(@organization), method: :delete
+%h3
+  ="Admin #{@admin.email}"
+%h3
+  Users
+  %ul
+    -@users.each do |user|
+      %li
+        =user.email
+%h3
+  Boards
+  -if @boards && !@boards.empty?
+    %ul
+      -@boards.each do |board|
+        %li
+          =link_to board.title, board_path(board)
+%h4 Add new board
+=render 'organizations/board_form'
