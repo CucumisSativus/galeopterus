@@ -29,8 +29,7 @@
         Add list
         %i.icon.ion-plus-circled
   %ul#lists_container.list-inline
-    - @board.list_by_order.each do |id|
-      - list = @board.lists.find id
+    - @board.list_by_order.each do |list|
       %li.ui-state-default.list-item-wrap{ data: { id: list.id } }= render 'list', list: list
   =render 'add_card_modal'
   =render 'add_file_modal'

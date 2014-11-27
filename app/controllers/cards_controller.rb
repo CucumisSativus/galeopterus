@@ -2,11 +2,11 @@ class CardsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @card = Card.create card_params
+    @card = Card.new card_params
     if @card.save
       redirect_to board_path(params[:card][:board_id]), notice: 'Card added!'
     else
-      redirect_to board_path(params[:card][:board_id]), notice: 'Error adding card!'
+      redirect_to board_path(params[:card][:board_id]), alert: 'Error adding card!'
     end
   end
 

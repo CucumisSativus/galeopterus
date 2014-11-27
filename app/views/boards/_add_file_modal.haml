@@ -4,6 +4,7 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
         %h4#modalTitleId.modal-title Add new list
+        %span example span
       .modal-body
         = form_for List.new, url: { controller: 'lists', action: 'create'} do |f|
           .form-group
@@ -11,4 +12,5 @@
             = f.text_field :title, class: 'form-control'
           .text-center
             = f.hidden_field :board_id, value: @board.id
+            = f.hidden_field :board, value: @board
             = f.submit 'Add list', class: 'btn btn-success'

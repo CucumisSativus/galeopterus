@@ -1,7 +1,8 @@
 .list-item
   .list-header
     .list-actions
-      .glyphicon.glyphicon-plus.add-card{class: 'btn btn-success btn-xs', data: { target: "#addCard", toggle: "modal", listId: list.id}}
+      .add-card{class: 'btn btn-success btn-xs', data: { target: "#addCard", toggle: "modal", listId: list.id}}
+        %i.glyphicon.glyphicon-plus
       = link_to list_path, method: :delete, class: 'btn btn-danger btn-xs' do
         .glyphicon.glyphicon-trash
     %h3= list.title

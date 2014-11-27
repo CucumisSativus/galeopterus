@@ -15,6 +15,7 @@ class BoardsController < ApplicationController
   end
 
   def show
+    @board = Board.find(params[:id])
     return if @board == current_user.boards.where(id: params[:id]).first
     redirect_to user_dashboard_path, alert: 'You are not allowed to see this board!'
   end
