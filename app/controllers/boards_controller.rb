@@ -14,6 +14,13 @@ class BoardsController < ApplicationController
     end
   end
 
+  def create_from_organization
+    @board = Board.new board_params
+    @board.organization_id = params[:organization_id]
+    return unless @board.save
+    redirect_to user_dashboard_path, notice: 'Board added successfuly!'
+  end
+
   def show
     @board = Board.find(params[:id])
     return if @board == current_user.boards.where(id: params[:id]).first

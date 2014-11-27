@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141022172107) do
+ActiveRecord::Schema.define(version: 20141126200958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,8 +27,13 @@ ActiveRecord::Schema.define(version: 20141022172107) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "list_order", default: [], array: true
+    t.integer  "list_order",      default: [], array: true
+    t.integer  "organisation_id"
+    t.integer  "organization_id"
   end
+
+  add_index "boards", ["organisation_id"], name: "index_boards_on_organisation_id", using: :btree
+  add_index "boards", ["organization_id"], name: "index_boards_on_organization_id", using: :btree
 
   create_table "card_comments", force: true do |t|
     t.text     "comment_body"
@@ -51,6 +56,26 @@ ActiveRecord::Schema.define(version: 20141022172107) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "organizations", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "admin_id"
+    t.boolean  "public"
+  end
+
+  add_index "organizations", ["admin_id"], name: "index_organizations_on_admin_id", using: :btree
+
+  create_table "user_organization_connections", force: true do |t|
+    t.integer  "organization_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_organization_connections", ["organization_id"], name: "index_user_organization_connections_on_organization_id", using: :btree
+  add_index "user_organization_connections", ["user_id"], name: "index_user_organization_connections_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

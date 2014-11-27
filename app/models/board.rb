@@ -4,6 +4,7 @@ class Board < ActiveRecord::Base
   has_many :lists, dependent: :destroy
   has_many :board_connections
   has_many :users, through: :board_connections
+  belongs_to :organization
 
   def list_count
     lists.count

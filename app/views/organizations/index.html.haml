@@ -1,0 +1,8 @@
+-if !@organizations || @organizations.empty?
+  %p
+    You are not enlisted to any of organizations
+    =link_to 'Create one', new_organization_path
+-else
+  -@organizations.each do |organization|
+    %h3
+      =link_to organization.name, organization_path(organization)
