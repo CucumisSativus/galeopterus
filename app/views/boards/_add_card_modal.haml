@@ -11,5 +11,5 @@
             = f.text_field :title, class: 'form-control'
           .text-center
             = f.hidden_field :list_id, value: 0, id: 'cardListId'
-            = f.hidden_field :board_id, value: @board.id
+            -# = f.hidden_field :board_id, value: @board.id
             = f.submit 'Add card', class: 'btn btn-success'

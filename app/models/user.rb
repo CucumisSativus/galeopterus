@@ -10,4 +10,5 @@ class User < ActiveRecord::Base
   has_many :boards, through: :board_connections
   has_many :user_organization_connections
   has_many :organizations, through: :user_organization_connections
+  has_many :organization_invitations
 end

@@ -3,10 +3,11 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.new card_params
+    @list = List.find(params[:card][:list_id])
     if @card.save
-      redirect_to board_path(params[:card][:board_id]), notice: 'Card added!'
+      redirect_to board_path(@list.board_id), notice: 'Card added!'
     else
-      redirect_to board_path(params[:card][:board_id]), alert: 'Error adding card!'
+      redirect_to board_path(@list.board_id), alert: 'Error adding card!'
     end
   end
 

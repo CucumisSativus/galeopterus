@@ -8,5 +8,13 @@
   #boards_container
     - @boards.each do |board|
       = render 'boards/board_item', board: board
+.box
+  %h4.inline Organization invitations:
+  %br
+  -@invitations.each do |invitation|
+    =invitation.organization.name
+    .pull-right
+      =link_to 'Accept', accept_organization_invitation_path(invitation), method: :post
+      =link_to 'Reject', reject_organization_invitation_path(invitation), method: :post
 
 =render 'add_board_modal'

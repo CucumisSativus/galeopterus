@@ -1,21 +1,29 @@
 %h2
   =@organization.name
-=link_to 'Edit', edit_organization_path(@organization)
-=link_to 'Destroy', organization_path(@organization), method: :delete
+-if current_user == @organization.admin
+  =link_to 'Edit', edit_organization_path(@organization)
+  =link_to 'Destroy', organization_path(@organization), method: :delete
 %h3
   ="Admin #{@admin.email}"
 %h3
   Users
-  %ul
-    -@users.each do |user|
-      %li
-        =user.email
+%ul
+  -@users.each do |user|
+    %li
+      =user.email
+-if current_user == @organization.admin
+  =form_for :invitation, url: organization_invitations_path do |f|
+    =f.hidden_field :organization_id, value: @organization.id
+    .form-group
+      =f.label :user_id, 'User email'
+      =f.email_field :email, class: 'form-controll'
+    =f.submit 'Invite'
 %h3
   Boards
-  -if @boards && !@boards.empty?
-    %ul
-      -@boards.each do |board|
-        %li
-          =link_to board.title, board_path(board)
+-if @boards && !@boards.empty?
+  %ul
+    -@boards.each do |board|
+      %li
+        =link_to board.title, board_path(board)
 %h4 Add new board
 =render 'organizations/board_form'

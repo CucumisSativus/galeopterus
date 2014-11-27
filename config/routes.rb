@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'accounts#index', as: :user_dashboard
 
   resources :organizations
+  resources :organization_invitations, only: :create do
+    member do
+      post :accept
+      post :reject
+    end
+  end
   post '/board_from_organization/:organization_id', to: 'boards#create_from_organization', as: :board_from_organization
   resources :boards
   resources :lists, only: [:create, :destroy]
