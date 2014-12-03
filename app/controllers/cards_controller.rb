@@ -18,6 +18,19 @@ class CardsController < ApplicationController
     redirect_to board_path(@board), notice: 'Card removed'
   end
 
+  def move_to_list
+    @card = Card.find(params[:id])
+    @card.list_id = params[:list_id]
+    if @card.save
+      respond_to do |format|
+        format.json { render status: :ok }
+      end
+    else
+      respond_to do |format|
+        format.json { render status: :unprocesable_entity }
+      end
+    end
+  end
   private
 
   def card_params

@@ -15,5 +15,6 @@ Rails.application.routes.draw do
   resources :boards
   put '/boards/:id/mark', to: 'boards#mark', as: :board_mark
   resources :lists, only: [:create, :destroy]
+  get '/cards/:id/move_to_list/:list_id', to: 'cards#move_to_list', as: :card_move_to_list
   resources :cards, only: [:create, :destroy]
 end
