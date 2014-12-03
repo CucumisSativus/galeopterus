@@ -1,4 +1,9 @@
 .board{ id: "board-#{ board.id }" }
+  = link_to board_mark_path(board), method: :put, class: 'btn' do
+    - if board.marked?
+      %i.glyphicon.glyphicon-star
+    - else 
+      %i.glyphicon.glyphicon-star-empty
   = link_to board.title, board_path(board)
   .pull-right
     lists:
