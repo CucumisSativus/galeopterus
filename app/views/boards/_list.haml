@@ -3,18 +3,14 @@
     .list-actions
       .add-card{class: 'btn btn-success btn-xs', data: { target: "#addCard", toggle: "modal", listId: list.id}}
         %i.glyphicon.glyphicon-plus
-      = link_to list_path, method: :delete, class: 'btn btn-danger btn-xs' do
+      = link_to list_path, method: :delete, class: 'btn btn-danger btn-xs white-font' do
         .glyphicon.glyphicon-trash
     %h3= list.title
     cards:
     = list.cards.count
   %ul.tasks-container
     -list.cards.each do |card|
-      %li.task-item.ui-state-default
-        =card.title
-        .pull-right
-          = link_to card_path(card), method: :delete, class: 'btn btn-danger btn-xs' do
-            .glyphicon.glyphicon-trash
+      = render 'card_item', card: card
 
 :coffee
   $ ->

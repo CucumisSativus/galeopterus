@@ -11,6 +11,16 @@ class CardsController < ApplicationController
     end
   end
 
+  def update
+    @card = Card.find params[:id]
+    @card.update_attributes card_params
+    if @card.save
+      redirect_to board_path(@card.list.board_id), notice: 'Card updated!'
+    else
+      redirect_to board_path(@card.list.board_id), alert: 'Error updating card!'
+    end
+  end
+
   def destroy
     @card = Card.find(params[:id])
     @board = @card.list.board
@@ -21,6 +31,6 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:title, :list_id)
+    params.require(:card).permit(:title, :list_id, :label_color, :end_date)
   end
 end

@@ -1,0 +1,29 @@
+%li.task-item.ui-state-default
+  %a{ href: "#card-#{ card.id }", data: { toggle: 'collapse' } }
+    =card.title
+    %span.caret
+  .pull-right
+    = link_to card_path(card), method: :delete, class: 'btn btn-danger btn-xs white-font' do
+      .glyphicon.glyphicon-trash
+  .collapse{ id: "card-#{ card.id }" }
+    = form_for card do |f|
+      .task-details-part
+        = f.label :end_date
+        = f.text_field :end_date, class: 'form-control datepicker'
+      .task-details-part
+        = f.label :label_color
+        = f.select :label_color, options_for_select(Card.get_labels), { include_blank: true }, class: 'color-select'
+
+      = f.submit 'save', class: 'btn btn-success'
+
+:javascript
+  function format(state) {
+    if (!state.id) return state.text; // optgroup
+    return "<div class='color-sample' style='display:inline-block;width:10px;height:10px;margin-right:15px;background-color:" + state.id + ";' /><span>" + state.text + "</span>"
+  }
+  $("select.color-select").select2({
+    formatResult: format,
+    formatSelection: format,
+    minimumResultsForSearch: -1,
+    escapeMarkup: function(m) { return m; }
+  });

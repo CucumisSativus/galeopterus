@@ -16,9 +16,9 @@ gem 'devise-i18n'
 gem 'haml-rails'
 gem 'pg'
 # assets
-gem 'rails-assets-jquery-ui'
-gem 'rails-assets-jquery-sortable'
 gem 'rails-assets-bootstrap-sass'
+gem 'rails-assets-select2'
+gem 'jquery-ui-rails', '~> 5.0.3'
 
 group :development do
   gem 'better_errors'

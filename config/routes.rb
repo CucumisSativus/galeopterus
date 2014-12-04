@@ -14,5 +14,5 @@ Rails.application.routes.draw do
   post '/board_from_organization/:organization_id', to: 'boards#create_from_organization', as: :board_from_organization
   resources :boards
   resources :lists, only: [:create, :destroy]
-  resources :cards, only: [:create, :destroy]
+  resources :cards, only: [:create, :update, :destroy]
 end
