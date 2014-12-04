@@ -1,7 +1,7 @@
 .list-item
   .list-header
     .list-actions
-      .add-card{class: 'btn btn-success btn-xs', data: { target: "#addCard", toggle: "modal", listId: list.id}}
+      .add-card{class: 'btn btn-success btn-xs', data: { target: "#addCard", toggle: "modal", 'list-id' => list.id}}
         %i.glyphicon.glyphicon-plus
       = link_to list_path, method: :delete, class: 'btn btn-danger btn-xs white-font' do
         .glyphicon.glyphicon-trash
@@ -11,6 +11,8 @@
   %ul.tasks-container
     -list.cards.each do |card|
       = render 'card_item', card: card
+
+  = render 'add_card_modal', list: list
 
 :coffee
   $ ->

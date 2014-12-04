@@ -20,7 +20,7 @@ class Board < ActiveRecord::Base
 
   def list_by_order
     ordered = []
-    self.list_order.each { |id| ordered << self.lists.find(id) }
+    self.list_order.each { |id| ordered << self.lists.where(id: id).first }
     ordered
   end
 

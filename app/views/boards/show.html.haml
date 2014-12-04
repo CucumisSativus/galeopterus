@@ -6,7 +6,7 @@
   = link_to board_mark_path(@board), method: :put, class: 'btn' do
     - if @board.marked?
       %i.glyphicon.glyphicon-star
-    - else 
+    - else
       %i.glyphicon.glyphicon-star-empty
 = link_to board_path(@board), method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' do
   Delete this board
@@ -35,16 +35,12 @@
         Add list
         %i.icon.ion-plus-circled
   %ul#lists_container.list-inline
-    - @board.list_by_order.each do |list|
+    - @lists.each do |list|
       %li.ui-state-default.list-item-wrap{ data: { id: list.id } }= render 'list', list: list
-  =render 'add_card_modal'
   =render 'add_file_modal'
 
 :coffee
   $ ->
-    $(".add-card").click (e) ->
-      list_id = $(e.target).attr 'data-listid'
-      $('#cardListId').attr 'value', list_id
 
     $("#lists_container").sortable(
       placeholder: "ui-state-highlight"
