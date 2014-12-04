@@ -23,8 +23,6 @@ class BoardsController < ApplicationController
 
   def show
     @board = Board.find(params[:id])
-    return if @board == current_user.boards.where(id: params[:id]).first
-    redirect_to user_dashboard_path, alert: 'You are not allowed to see this board!'
   end
 
   def destroy
@@ -45,9 +43,16 @@ class BoardsController < ApplicationController
     end
   end
 
+  def mark
+    @board = Board.find params[:id]
+    @board.marked = !@board.marked
+    @board.save
+    redirect_to user_dashboard_path
+  end
+
   private
 
   def board_params
-    params.require(:board).permit(:title, list_order: [])
+    params.require(:board).permit(:marked, :title, list_order: [])
   end
 end

@@ -17,3 +17,11 @@
     $(".tasks-container").sortable
       placeholder: "ui-state-highlight"
       connectWith: ".tasks-container"
+      dropOnEmpty: true
+      stop: (event, ui) ->
+        item = ui.item
+        listId = item.parents('.list-item-wrap').data('id')
+        $.ajax
+          type: 'GET'
+          url: "/cards/" + item.data('id') + "/move_to_list/" + listId + ".json"
+          dataType: 'JSON'

@@ -1,5 +1,6 @@
 .tasks-container{
   list-style: none;
+  min-height: 50px;
   padding: 0;
   > .ui-state-highlight {
     background-color: #c5e8fc;
@@ -12,6 +13,7 @@
 .task-item{
   border: 1px solid #aaa!important;
   padding: 15px 5px;
+  position: relative;
 }
 
 .task-details-part {
@@ -22,4 +24,16 @@
 .color-select {
   display: block;
   width: 100%;
+}
+
+.label-flag {
+  height: 50px;
+  position: absolute;
+  right: 5px;
+  top: 0;
+  width: 20px;
+}
+
+.card-deadline {
+  padding-right: 30px;
 }

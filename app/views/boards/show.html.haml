@@ -1,7 +1,13 @@
 = link_to user_dashboard_path do
   %i.glyphicon.glyphicon-circle-arrow-left
   Back to dashboard
-%h2= @board.title
+%h2
+  = @board.title
+  = link_to board_mark_path(@board), method: :put, class: 'btn' do
+    - if @board.marked?
+      %i.glyphicon.glyphicon-star
+    - else 
+      %i.glyphicon.glyphicon-star-empty
 = link_to board_path(@board), method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' do
   Delete this board
   %i.glyphicon.glyphicon-trash

@@ -27,9 +27,10 @@ ActiveRecord::Schema.define(version: 20141203235332) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "list_order",      default: [], array: true
+    t.integer  "list_order",      default: [],    array: true
     t.integer  "organisation_id"
     t.integer  "organization_id"
+    t.boolean  "marked",          default: false
   end
 
   add_index "boards", ["organisation_id"], name: "index_boards_on_organisation_id", using: :btree

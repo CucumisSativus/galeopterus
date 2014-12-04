@@ -1,20 +1,21 @@
-%li.task-item.ui-state-default
+%li.task-item.ui-state-default{ data: { id: card.id }}
+  .label-flag{ style: "background-color:#{ card.label_color };" }
+  .pull-right.card-deadline
+    = card.end_date.strftime("%m-%d-%Y") if card.end_date
   %a{ href: "#card-#{ card.id }", data: { toggle: 'collapse' } }
     =card.title
     %span.caret
-  .pull-right
-    = link_to card_path(card), method: :delete, class: 'btn btn-danger btn-xs white-font' do
-      .glyphicon.glyphicon-trash
   .collapse{ id: "card-#{ card.id }" }
     = form_for card do |f|
       .task-details-part
         = f.label :end_date
-        = f.text_field :end_date, class: 'form-control datepicker'
+        = f.text_field :end_date, class: 'form-control datepicker', id: "card-end-date-#{ card.id }"
       .task-details-part
         = f.label :label_color
-        = f.select :label_color, options_for_select(Card.get_labels), { include_blank: true }, class: 'color-select'
+        = f.select :label_color, options_for_select(Card.get_labels, card.label_color), { include_blank: true }, class: 'color-select'
 
-      = f.submit 'save', class: 'btn btn-success'
+      = f.submit 'save', class: 'btn btn-success btn-xs'
+      = link_to 'remove', card_path(card), method: :delete, class: 'btn btn-danger btn-xs white-font pull-right'
 
 :javascript
   function format(state) {
