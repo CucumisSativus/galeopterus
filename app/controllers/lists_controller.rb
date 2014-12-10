@@ -15,12 +15,25 @@ class ListsController < ApplicationController
   def destroy
     @list = List.find(params[:id])
     @board = @list.board
+    @list.archivise!
+    redirect_to board_path(@board), notice: 'List archivised'
+  end
+
+  def dearchivise
+    @list = List.find(params[:id])
+    @board = @list.board
+    @list.dearchivise!
+    redirect_to board_path(@board), notice: 'List restored'
+  end
+
+  def destroy_permanently
+    @list = List.find(params[:id])
+    @board = @list.board
     # remove list id from board order list
     @board.list_order.delete_if { |item| item == @list.id }
     @list.destroy
     redirect_to board_path(@board), notice: 'List removed'
   end
-
   private
 
   def list_params
