@@ -54,6 +54,6 @@ class BoardsController < ApplicationController
   private
 
   def board_params
-    params.require(:board).permit(:marked, :title, list_order: [])
+    params.require(:board).permit(:marked, :title, :background_color, list_order: [])
   end
 end

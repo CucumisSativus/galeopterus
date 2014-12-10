@@ -32,4 +32,14 @@ class Board < ActiveRecord::Base
     self.list_order = listsId
     self.save!
   end
+
+  def self.get_colors
+    {
+      green: '#4ffb70',
+      red: '#d22f17',
+      yellow: '#e3dd3d',
+      blue: '#2241f4'
+    }
+  end
+
 end
