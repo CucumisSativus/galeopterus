@@ -29,14 +29,14 @@ class CardsController < ApplicationController
   end
 
   def dearchivise
-    @card = Card.find(params[:id])
+    @card = Card.unscoped.find(params[:id])
     @board = @card.list.board
     @card.dearchivise!
     redirect_to board_path(@board), notice: 'Card restored'
   end
 
   def destroy_permanently
-    @card = Card.find(params[:id])
+    @card = Card.unscoped.find(params[:id])
     @board = @card.list.board
     @card.destroy
     redirect_to board_path(@board), notice: 'Card removed'

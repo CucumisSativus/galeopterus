@@ -21,7 +21,7 @@ class List < ActiveRecord::Base
   def dearchivise!
     self.archivised = false
     self.save
-    cards.each do |card|
+    cards.unscoped.each do |card|
       card.dearchivise!
     end
   end
