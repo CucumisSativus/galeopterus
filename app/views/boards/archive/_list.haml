@@ -1,0 +1,19 @@
+.list-item.archivised
+  .list-header
+    .list-actions
+      = link_to destroy_permanently_list_path(list), method: :delete, class: 'btn btn-danger btn-xs white-font', data: { confirm: 'This will completly remove this list and all cards it contains!!! Are You sure?'} do
+        remove
+      = link_to dearchivise_list_path(list), class: 'btn btn-primary btn-xs white-font', method: :patch do
+        restore
+    %h3= list.title
+    cards:
+    = list.cards.count
+    .text-center
+      %a{ href: "#tasks-#{ list.id }", data: { toggle: 'collapse' } }
+        expand
+        %span.caret
+  %ul.tasks-container.collapse{ id: "tasks-#{ list.id }"}
+    -list.cards.each do |card|
+      = render 'card_item', card: card
+
+  = render 'add_card_modal', list: list

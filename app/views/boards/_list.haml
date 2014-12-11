@@ -3,7 +3,7 @@
     .list-actions
       .add-card{class: 'btn btn-success btn-xs', data: { target: "#addCard", toggle: "modal", 'list-id' => list.id}}
         %i.glyphicon.glyphicon-plus
-      = link_to list_path, method: :delete, class: 'btn btn-danger btn-xs white-font' do
+      = link_to list_path(list), method: :delete, class: 'btn btn-danger btn-xs white-font' do
         .glyphicon.glyphicon-trash
     %h3= list.title
     cards:

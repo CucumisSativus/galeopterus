@@ -12,7 +12,11 @@ Rails.application.routes.draw do
     end
   end
   post '/board_from_organization/:organization_id', to: 'boards#create_from_organization', as: :board_from_organization
-  resources :boards
+  resources :boards do
+    member do
+      get 'show_archivised'
+    end
+  end
   put '/boards/:id/mark', to: 'boards#mark', as: :board_mark
   resources :lists, only: [:create, :destroy] do
     member do

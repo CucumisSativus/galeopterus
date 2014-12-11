@@ -21,6 +21,10 @@
   min-height: 500px;
   padding: 0;
   width: 300px;
+
+  &.archivised {
+    min-height: 30px;
+  }
 }
 
 .list-header{
@@ -28,7 +32,8 @@
   border-bottom: 1px #aaa solid;
   padding: 5px;
   position: relative;
-  h3{
+
+  h3 {
     margin: 0;
   }
 }

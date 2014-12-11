@@ -1,0 +1,39 @@
+= link_to user_dashboard_path do
+  %i.glyphicon.glyphicon-circle-arrow-left
+  Back to dashboard
+%h2
+  = @board.title
+  archive
+  = link_to board_mark_path(@board), method: :put, class: 'btn' do
+    - if @board.marked?
+      %i.glyphicon.glyphicon-star
+    - else
+      %i.glyphicon.glyphicon-star-empty
+= link_to show_archivised_board_path(@board), class: 'btn btn-primary btn-xs' do
+  Project archive
+= link_to board_path(@board), method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' do
+  Delete this board
+  %i.glyphicon.glyphicon-trash
+.box
+  %div{ role: 'tabpanel' }
+    %ul.nav.nav-tabs{ role: 'tablist' }
+      %li.active{ role: 'presentation' }
+        %a{ href: '#archivised-lists', role: 'tab', data: { toggle: 'tab' } }
+          %i.icon.ion-clipboard
+          Archivised lists
+      %li{ role: 'presentation' }
+        %a{ href: '#archivised-cards', role: 'tab', data: { toggle: 'tab' } }
+          %i.icon.ion-clipboard
+          Archivised cards
+    .tab-content
+      #archivised-lists.tab-pane.active{ role: 'tabpanel' }
+        %ul#lists_container.list-inline
+          - @lists.each do |list|
+            - if list
+              %li.list-item-wrap{ data: { id: list.id } }= render 'boards/archive/list', list: list
+      #archivised-cards.tab-pane{ role: 'tabpanel' }
+        %ul#cards_container.list-inline
+          - @lists.each do |list|
+            - if list
+              - list.cards.archivised.each do |card|
+                %li.card-item-wrap{ data: { id: card.id } }= render 'boards/archive/card', card: card

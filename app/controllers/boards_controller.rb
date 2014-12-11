@@ -22,8 +22,13 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @board = Board.includes(:lists => :cards).where(id: params[:id]).first
+    @board = Board.find params[:id]
     @lists = @board.list_by_order
+  end
+
+  def show_archivised
+    @board = Board.find params[:id]
+    @lists = @board.lists.archivised
   end
 
   def destroy

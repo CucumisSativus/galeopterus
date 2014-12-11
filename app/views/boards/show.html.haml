@@ -8,6 +8,8 @@
       %i.glyphicon.glyphicon-star
     - else
       %i.glyphicon.glyphicon-star-empty
+= link_to show_archivised_board_path(@board), class: 'btn btn-primary btn-xs' do
+  Project archive
 = link_to board_path(@board), method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger btn-xs' do
   Delete this board
   %i.glyphicon.glyphicon-trash
@@ -36,7 +38,8 @@
         %i.icon.ion-plus-circled
   %ul#lists_container.list-inline
     - @lists.each do |list|
-      %li.ui-state-default.list-item-wrap{ data: { id: list.id } }= render 'list', list: list
+      - if list
+        %li.ui-state-default.list-item-wrap{ data: { id: list.id } }= render 'list', list: list
   =render 'add_file_modal'
 
 :coffee
