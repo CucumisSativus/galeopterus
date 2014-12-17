@@ -39,6 +39,8 @@ group :production do
   gem 'unicorn'
 end
 group :test do
+  gem 'simplecov', require: false
+  gem 'simplecov-rcov'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
