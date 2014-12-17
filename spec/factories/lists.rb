@@ -3,5 +3,6 @@
 FactoryGirl.define do
   factory :list do
     title 'MyString'
+    board { FactoryGirl.create(:board)}
   end
 end
