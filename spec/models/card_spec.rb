@@ -6,19 +6,21 @@ describe Card do
 
   describe '#archivisation' do
     it 'should archivise cards' do
-      pending 'unable to hit db'
-      @card = Card.new(title: 'tytulik', list_id: 1, description: 'cokolwiek')
+      board = FactoryGirl.create(:board)
+      @list = List.create(board_id: board.id)
+      @card = Card.new(title: 'tytulik', list_id: @list.id, description: 'cokolwiek')
       @card.save
       @card.archivise!
-      expect(Card.first.archivised).to eq(true)
+      expect(Card.all.count).to eq(0)
     end
 
     it 'should unarchivise cards' do
-      pending 'unable to hit db'
-      @card = Card.new(title: 'tytulik', list_id: 1, description: 'cokolwiek')
+      board = FactoryGirl.create(:board)
+      @list = List.create(board_id: board.id)
+      @card = Card.new(title: 'tytulik', list_id: @list.id, description: 'cokolwiek')
       @card.save
       @card.dearchivise!
-      expect(Card.first.archivised).to eq(false)
+      expect(Card.all.count).to eq(1)
     end
   end
 end
